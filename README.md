@@ -28,3 +28,5 @@ resource appService 'Microsoft.Web/sites@2020-06-01' = {
   }
 }
 ```
+
+[![asciicast](https://asciinema.org/a/549280.png)](https://asciinema.org/a/549280)

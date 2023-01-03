@@ -1,0 +1,1 @@
+# bicep-functionapp-settings

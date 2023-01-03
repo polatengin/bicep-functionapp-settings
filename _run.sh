@@ -12,3 +12,5 @@ az webapp config appsettings set --name "fa${RANDOM_STRING}" --resource-group "r
 az webapp config appsettings set --name "fa${RANDOM_STRING}" --resource-group "rg-${RANDOM_STRING}" --settings "APPINSIGHTS_INSTRUMENTATIONKEY=${RANDOM_STRING}" --output none
 az webapp config appsettings set --name "fa${RANDOM_STRING}" --resource-group "rg-${RANDOM_STRING}" --settings "APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=${RANDOM_STRING}" --output none
 
+az webapp config appsettings list --name "fa${RANDOM_STRING}" --resource-group "rg-${RANDOM_STRING}" > "1.before-deployment.json"
+

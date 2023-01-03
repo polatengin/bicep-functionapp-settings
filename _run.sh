@@ -4,3 +4,5 @@ rm -rf *.json
 
 az group create --location "westus" --name "rg-${RANDOM_STRING}" --output none
 
+az deployment group create --resource-group "rg-${RANDOM_STRING}" --template-file "main.bicep" --parameters "random=${RANDOM_STRING}" --output none
+

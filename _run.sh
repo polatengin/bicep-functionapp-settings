@@ -21,3 +21,5 @@ az webapp config appsettings list --name "fa${RANDOM_STRING}" --resource-group "
 echo "These are the differences between the app settings before and after the deployment"
 diff 1.before-deployment.json 2.after-deployment.json
 
+echo "Interestingly, the app settings are the same as when the app was first created, even though the deployment changed the app settings"
+diff 0.fresh.json 2.after-deployment.json

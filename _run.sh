@@ -18,3 +18,6 @@ az deployment group create --resource-group "rg-${RANDOM_STRING}" --template-fil
 
 az webapp config appsettings list --name "fa${RANDOM_STRING}" --resource-group "rg-${RANDOM_STRING}" > "2.after-deployment.json"
 
+echo "These are the differences between the app settings before and after the deployment"
+diff 1.before-deployment.json 2.after-deployment.json
+

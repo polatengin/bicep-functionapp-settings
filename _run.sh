@@ -8,3 +8,7 @@ az deployment group create --resource-group "rg-${RANDOM_STRING}" --template-fil
 
 az webapp config appsettings list --name "fa${RANDOM_STRING}" --resource-group "rg-${RANDOM_STRING}" > "0.fresh.json"
 
+az webapp config appsettings set --name "fa${RANDOM_STRING}" --resource-group "rg-${RANDOM_STRING}" --settings "new=setting" --output none
+az webapp config appsettings set --name "fa${RANDOM_STRING}" --resource-group "rg-${RANDOM_STRING}" --settings "APPINSIGHTS_INSTRUMENTATIONKEY=${RANDOM_STRING}" --output none
+az webapp config appsettings set --name "fa${RANDOM_STRING}" --resource-group "rg-${RANDOM_STRING}" --settings "APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=${RANDOM_STRING}" --output none
+

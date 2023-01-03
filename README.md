@@ -30,4 +30,15 @@ resource appService 'Microsoft.Web/sites@2020-06-01' = {
 ```
 
 Since Azure deployments are idemponent, between deployments the settings should not change.
+
+You can run the `_run.sh` script to;
+
+- Deploy the Bicep template
+- Save the settings to a file (`0.fresh.json`)
+- Set new settings, update existing settings
+- Save the settings to a file (`1.before-deployment.json`)
+- Deploy the Bicep template again
+- Save the settings to a file (`2.after-deployment.json`)
+- Compare the settings before and after the deployment
+
 [![asciicast](https://asciinema.org/a/549280.png)](https://asciinema.org/a/549280)

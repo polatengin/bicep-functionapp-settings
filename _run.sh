@@ -14,3 +14,5 @@ az webapp config appsettings set --name "fa${RANDOM_STRING}" --resource-group "r
 
 az webapp config appsettings list --name "fa${RANDOM_STRING}" --resource-group "rg-${RANDOM_STRING}" > "1.before-deployment.json"
 
+az deployment group create --resource-group "rg-${RANDOM_STRING}" --template-file "main.bicep" --parameters "random=${RANDOM_STRING}" --output none
+

@@ -90,3 +90,31 @@ resource functionApp 'Microsoft.Web/sites@2020-12-01' = {
     httpsOnly: true
   }
 }
+
+resource function 'Microsoft.Web/sites/functions@2020-12-01' = {
+  name: '${functionApp.name}/MyHttpTriggeredFunction'
+  properties: {
+    config: {
+      disabled: false
+      bindings: [
+        {
+          name: 'req'
+          type: 'httpTrigger'
+          direction: 'in'
+          authLevel: 'function'
+          methods: [
+            'get'
+          ]
+        }
+        {
+          name: '$return'
+          type: 'http'
+          direction: 'out'
+        }
+      ]
+    }
+    files: {
+      'run.csx': loadTextContent('main.csx')
+    }
+  }
+}

@@ -1,4 +1,5 @@
 {
   "name": "Bicep Dev Environment",
   "image": "mcr.microsoft.com/devcontainers/base:bullseye",
+  "remoteUser": "root"
 }

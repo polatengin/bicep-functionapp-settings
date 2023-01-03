@@ -29,4 +29,5 @@ resource appService 'Microsoft.Web/sites@2020-06-01' = {
 }
 ```
 
+Since Azure deployments are idemponent, between deployments the settings should not change.
 [![asciicast](https://asciinema.org/a/549280.png)](https://asciinema.org/a/549280)

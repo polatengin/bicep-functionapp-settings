@@ -6,7 +6,7 @@ param storageAccountName string = 'strg${random}'
 param appInsightsName string = 'ai${random}'
 param location string = resourceGroup().location
 
-resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   name: storageAccountName
   location: location
   sku: {
@@ -43,7 +43,7 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-resource plan 'Microsoft.Web/serverfarms@2020-12-01' = {
+resource plan 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: appServicePlanName
   location: location
   kind: 'functionapp'
@@ -53,7 +53,7 @@ resource plan 'Microsoft.Web/serverfarms@2020-12-01' = {
   properties: {}
 }
 
-resource functionApp 'Microsoft.Web/sites@2020-12-01' = {
+resource functionApp 'Microsoft.Web/sites@2022-03-01' = {
   name: functionAppName
   location: location
   kind: 'functionapp'
@@ -91,7 +91,7 @@ resource functionApp 'Microsoft.Web/sites@2020-12-01' = {
   }
 }
 
-resource function 'Microsoft.Web/sites/functions@2020-12-01' = {
+resource function 'Microsoft.Web/sites/functions@2022-03-01' = {
   name: '${functionApp.name}/MyHttpTriggeredFunction'
   properties: {
     config: {

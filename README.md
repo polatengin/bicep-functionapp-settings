@@ -1,6 +1,6 @@
-# Azure App Service settings difference between Bicep deployments
+# Azure deployment overwrites app settings difference between deployments
 
-Azure App Service can store application specific settings in the AppSettings configuration feature (official documentation can be found on; [Configure an App Service app](https://learn.microsoft.com/en-us/azure/app-service/configure-common?tabs=cli)).
+[Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/overview) can store application specific settings in the _AppSettings_ configuration feature (official documentation can be found on; [Configure an App Service app](https://learn.microsoft.com/en-us/azure/app-service/configure-common?tabs=cli)).
 
 These settings are stored on `Azure`, provided to the application as _Environment Variables_ and are _not_ part of the application code.
 

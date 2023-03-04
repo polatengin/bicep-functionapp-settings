@@ -1,4 +1,4 @@
-# Azure deployment overwrites app settings difference between deployments
+# Azure deployment overwrites app settings between deployments
 
 [Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/overview) can store application specific settings in the _AppSettings_ configuration feature (official documentation can be found on; [Configure an App Service app](https://learn.microsoft.com/en-us/azure/app-service/configure-common?tabs=cli)).
 

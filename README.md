@@ -1,8 +1,10 @@
 # Azure App Service settings difference between Bicep deployments
 
-Azure App Service service can store application specific settings in the Azure App Service configuration. These settings are stored in the Azure App Service configuration and are not part of the application code.
+Azure App Service can store application specific settings in the AppSettings configuration feature (official documentation can be found on; [Configure an App Service app](https://learn.microsoft.com/en-us/azure/app-service/configure-common?tabs=cli)).
 
-Azure App Service settings can be set using the Azure Portal, Azure CLI, Azure PowerShell, ARM templates, or Bicep.
+These settings are stored on `Azure`, provided to the application as _Environment Variables_ and are _not_ part of the application code.
+
+Azure App Service settings can be set using the [Azure Portal](https://portal.azure.com), [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/), [Azure Az PowerShell module](https://learn.microsoft.com/en-us/powershell/azure/install-az-ps), [ARM templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview), or [Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/).
 
 In the bicep example, the settings are set using the `appSettings` property of the `Microsoft.Web/sites` resource.
 
@@ -31,7 +33,7 @@ resource appService 'Microsoft.Web/sites@2020-06-01' = {
 
 Since Azure deployments are idemponent, between deployments the settings should not change.
 
-You can run the `_run.sh` script to;
+You can run the [deploy.sh](./deploy.sh) script to;
 
 - Deploy the Bicep template
 - Save the settings to a file (`0.fresh.json`)

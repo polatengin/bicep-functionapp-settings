@@ -60,6 +60,8 @@ Expectation is `1.before-deployment.json` and `2.after-deployment.json` are same
 
 ## Solution
 
+### Solution #3 (backup settings, restore settings)
+
 Until `preserveSettings` feature (or a feature like that) is introduced and provided by the Azure Deployment backend API, we should _backup_ the settings _before_ the deployment, and _restore_ it back _after_ the deployment.
 
 _Before_ the deployment, we can backup `appSettings` for a webapp;

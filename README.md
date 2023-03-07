@@ -62,7 +62,7 @@ Expectation is `1.before-deployment.json` and `2.after-deployment.json` are same
 
 Until `preserveSettings` feature (or a feature like that) is introduced and provided by the Azure Deployment backend API, we should _backup_ the settings _before_ the deployment, and _restore_ it back _after_ the deployment.
 
-_Before_ the deployment, we can backup appSettings for a webapp;
+_Before_ the deployment, we can backup `appSettings` for a webapp;
 
 ```bash
 az webapp config appsettings list --name "${WEB_APP_NAME}" --resource-group "${RESOURCE_GROUP_NAME}" | jq -r '.' > backup.json
@@ -74,7 +74,7 @@ Then do the deployment
 az deployment group create --resource-group "${RESOURCE_GROUP_NAME}" --template-file "main.bicep" --output "none"
 ```
 
-_After_ the deployment, we can restore the appSettings back;
+_After_ the deployment, we can restore the `appSettings` back;
 
 ```bash
 az webapp config appsettings set --name "${WEB_APP_NAME}" --resource-group "${RESOURCE_GROUP_NAME}" --settings "@backup.json" --output "none"

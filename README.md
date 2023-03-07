@@ -60,7 +60,7 @@ Expectation is `1.before-deployment.json` and `2.after-deployment.json` are same
 
 ## Solution
 
-There are a few solutions for the issue
+A few solutions can be used for the issue
 
 - Creating a KeyVault to store and retrieve app settings for an environment
 - Creating an App Configuration to store and retrieve app settings for an environment

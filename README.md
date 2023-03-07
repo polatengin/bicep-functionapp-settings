@@ -60,6 +60,11 @@ Expectation is `1.before-deployment.json` and `2.after-deployment.json` are same
 
 ## Solution
 
+There are a few solutions for the issue
+
+- Creating a KeyVault to store and retrieve app settings for an environment
+- Creating an App Configuration to store and retrieve app settings for an environment
+- Backup existing configuration _before_ the deployment, restore the configuration _after_ the deployment
 ### Solution #3 (backup settings, restore settings)
 
 Until `preserveSettings` feature (or a feature like that) is introduced and provided by the Azure Deployment backend API, we should _backup_ the settings _before_ the deployment, and _restore_ it back _after_ the deployment.

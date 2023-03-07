@@ -65,6 +65,94 @@ There are a few solutions for the issue
 - Creating a KeyVault to store and retrieve app settings for an environment
 - Creating an App Configuration to store and retrieve app settings for an environment
 - Backup existing configuration _before_ the deployment, restore the configuration _after_ the deployment
+
+### Solution #1 (using KeyVault)
+
+With the sample bicep module below, WebApp can have a KeyVault as the configuration store
+
+```bicep
+resource appServicePlan 'Microsoft.Web/serverfarms@2021-01-01' = {
+  name: 'appservice-sample'
+  location: 'westus2'
+  sku: {
+    name: 'F1'
+    tier: 'Free'
+    size: 'F1'
+    family: 'F'
+    capacity: 0
+  }
+}
+resource appService 'Microsoft.Web/sites@2021-01-01' = {
+  name: 'webapp-sample'
+  location: 'westus2'
+  kind: 'app'
+  properties: {
+    enabled: true
+    serverFarmId: appServicePlan.id
+  }
+  identity:{
+     type: 'SystemAssigned'
+  }
+}
+resource vault 'Microsoft.KeyVault/vaults@2022-07-01' = {
+  name: 'kv-sample'
+  location: 'westus2'
+  properties: {
+    accessPolicies:[
+      {
+        tenantId: subscription().tenantId
+        objectId: svcPrincipalObjectId
+        permissions: {
+          secrets: ['get', 'list']
+          certificates: ['get', 'list']
+          keys: ['get', 'list']
+        }
+      }
+    ]
+    enableRbacAuthorization: false
+    enableSoftDelete: false
+    enabledForDeployment: false
+    enabledForDiskEncryption: false
+    enabledForTemplateDeployment: false
+    tenantId: subscription().tenantId
+    sku: {
+      name: 'standard'
+      family: 'A'
+    }
+    networkAcls: {
+      defaultAction: 'Allow'
+      bypass: 'AzureServices'
+    }
+  }
+}
+resource secret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
+  parent: vault
+  name: 'samplesecret'
+  properties: {
+    contentType: 'text/plain'
+    value: 'samplevalue'
+  }
+}
+resource vaultAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: '${appService.name} Key Vault Secret User ${uniqueString(resourceGroup().id,appService.name)}'
+  scope: vault
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleId) // this is the role "Key Vault Secrets User"
+    principalId: appService.identity.principalId
+    principalType: 'ServicePrincipal'
+  }
+}
+resource appSettings 'Microsoft.Web/sites/config@2022-03-01' = {
+  name: 'appsettings'
+  parent: appService
+  properties: {
+    AppSecret: '@Microsoft.KeyVault(SecretUri=${vault.properties.secretUri})'
+    }
+  dependsOn:[
+    vaultAssignment
+  ]
+}
+```
 ### Solution #3 (backup settings, restore settings)
 
 Until `preserveSettings` feature (or a feature like that) is introduced and provided by the Azure Deployment backend API, we should _backup_ the settings _before_ the deployment, and _restore_ it back _after_ the deployment.

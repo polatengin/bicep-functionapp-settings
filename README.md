@@ -153,6 +153,32 @@ resource appSettings 'Microsoft.Web/sites/config@2022-03-01' = {
   ]
 }
 ```
+
+### Solution #2 (using App Configuration)
+
+With the sample bicep module below, an _App Configuration_ resource is created on Azure
+
+```bicep
+resource configStore 'Microsoft.AppConfiguration/configurationStores@2021-10-01-preview' = {
+  name: 'config-sample'
+  location: 'westus2'
+  sku: {
+    name: 'standard'
+  }
+}
+
+resource configStoreKeyValue 'Microsoft.AppConfiguration/configurationStores/keyValues@2021-10-01-preview' = {
+  parent: configStore
+  name: 'samplesecret'
+  properties: {
+    value: 'samplevalue'
+    contentType: 'text/plain'
+  }
+}
+```
+
+Quickstart documentation and Tutorials to use the App Configuration resource from your app (.net, asp.net java, python, ) can be found here; https://learn.microsoft.com/en-us/azure/azure-app-configuration/
+
 ### Solution #3 (backup settings, restore settings)
 
 Until `preserveSettings` feature (or a feature like that) is introduced and provided by the Azure Deployment backend API, we should _backup_ the settings _before_ the deployment, and _restore_ it back _after_ the deployment.

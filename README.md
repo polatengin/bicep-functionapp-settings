@@ -58,12 +58,13 @@ Expectation is `1.before-deployment.json` and `2.after-deployment.json` are same
 
 [![asciicast](https://asciinema.org/a/549280.png)](https://asciinema.org/a/549280)
 
-## Solution
+## Solutions
 
 A few solutions can be used for the issue
 
 - Creating a KeyVault to store and retrieve app settings for an environment
 - Creating an App Configuration to store and retrieve app settings for an environment
+- Combination of KeyVault and App configuration to store and retrieve app settings for an environment
 - Backup existing configuration _before_ the deployment, restore the configuration _after_ the deployment
 
 ### Solution #1 (using KeyVault)
@@ -179,7 +180,13 @@ resource configStoreKeyValue 'Microsoft.AppConfiguration/configurationStores/key
 
 Quickstart documentation and Tutorials to use the App Configuration resource from your app (.net, asp.net java, python, ) can be found here; https://learn.microsoft.com/en-us/azure/azure-app-configuration/
 
-### Solution #3 (backup settings, restore settings)
+### Solution #3 (combination of KeyVault and App Configuration)
+
+Configuration can be stored in a KeyVault instance, and an App Configuration service can be configured to get items from the KeyVault.
+
+Application can be configured to read configuration from the App Configuration service (actually from KeyVault, thru App Configuration)
+
+### Solution #4 (backup settings, restore settings)
 
 Until `preserveSettings` feature (or a feature like that) is introduced and provided by the Azure Deployment backend API, we should _backup_ the settings _before_ the deployment, and _restore_ it back _after_ the deployment.
 

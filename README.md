@@ -184,7 +184,7 @@ Quickstart documentation and Tutorials to use the App Configuration resource fro
 
 Configuration can be stored in a KeyVault instance, and an App Configuration service can be configured to get items from the KeyVault.
 
-Application can be configured to read configuration from the App Configuration service (actually from KeyVault, thru App Configuration)
+Application can be configured to read configuration from the App Configuration service (actually from KeyVault, through App Configuration)
 
 ### Solution #4 (backup settings, restore settings)
 
